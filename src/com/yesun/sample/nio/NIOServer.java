@@ -86,6 +86,9 @@ public class NIOServer {
             if (count > 0) {
                 receiveText = new String( receivebuffer.array(),0,count);
                 System.out.println("服务器端接受客户端数据--:"+receiveText);
+                
+                
+                
                 client.register(selector, SelectionKey.OP_WRITE);
             }
         } else if (selectionKey.isWritable()) {

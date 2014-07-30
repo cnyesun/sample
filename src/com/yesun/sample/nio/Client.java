@@ -15,7 +15,7 @@ public class Client {
 	public static void main(String[] args) {
 		Socket socket = null;
 		try {
-			 socket = new Socket("10.2.10.214", 8888);
+			 socket = new Socket("10.2.10.214", 1234);
 			 Writer out = new OutputStreamWriter(socket.getOutputStream());
 			 Date now = new Date();
 			 out.write(now.toString() + "\r\n");
