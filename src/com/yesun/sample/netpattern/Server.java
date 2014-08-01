@@ -30,7 +30,7 @@ public class Server {
      private int n;
     
      public static void main(String[] args) throws IOException{
-          Server server = new Server();
+          final Server server = new Server();
           server.start();
      }
     
@@ -55,6 +55,7 @@ public class Server {
           while(true){
                try{
                     n = selector.select();
+                    System.out.println("select完毕");
                }catch (IOException e) {
                     throw new RuntimeException("Selector.select()异常!");
                }
@@ -71,6 +72,7 @@ public class Server {
                               sc = ((ServerSocketChannel)key.channel()).accept();
                               sc.configureBlocking(false);
                               System.out.println("客户端:"+sc.socket().getInetAddress().getHostAddress()+" 已连接");
+                              //用完了就要删除，还要用就重新注册
                               SelectionKey k = sc.register(selector, SelectionKey.OP_READ);
                               ByteBuffer buf = ByteBuffer.allocate(1024);
                               k.attach(buf);
